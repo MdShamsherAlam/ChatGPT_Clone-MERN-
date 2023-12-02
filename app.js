@@ -22,6 +22,7 @@ app.use(morgan('dev'))
 app.use(errorHandler)
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v2/openai', openAiRoutes)
+app.use(express.static("client/build"))
 const PORT = process.env.PORT || 8081
 
 
