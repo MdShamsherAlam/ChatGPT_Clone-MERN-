@@ -1,4 +1,5 @@
 import express from 'express'
+import isAuth from '../middleware/isAuthMiddleware.js'
 import {
     summaryController,
     paragraphController,
@@ -11,8 +12,8 @@ import {
 const router = express.Router();
 
 //route
-router.post("/summary", summaryController);
-router.post("/paragraph", paragraphController);
+router.post("/summary", isAuth, summaryController);
+router.post("/paragraph", isAuth, paragraphController);
 router.post("/chatbot", chatbotController);
 router.post("/js-converter", jsconverterController);
 router.post("/scifi-image", scifiImageController);

@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.mjs"
+    "start": "nodemon app.mjs",
+    "dev": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "start-client": "cd client && npm start",
+    "start-server": "nodemon app.js"
   },
   "author": "Md Shamsher Alam",
   "license": "ISC",
@@ -22,5 +25,8 @@
     "mongoose": "^8.0.1",
     "morgan": "^1.10.0",
     "openai": "^4.20.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

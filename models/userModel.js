@@ -41,24 +41,11 @@ userSchema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
-//jwt token
-userSchema.methods.getSignedToken = function () {
-    // this is for managing token
-    const accessToken = JWT.sign({ id: this._id }, process.env.JWT_ACESS_SECRET, { expiresIn: process.env.JWT_ACESS_EXPIREIN });
-    // this is for managing session
-    const refreshToken = JWT.sign({ id: this._id }, process.env.JWT_REFRESS_TOKEN, { expiresIn: process.env.JWT_REFRESS_EXPIREIN });
-
-    return { accessToken, refreshToken };
-};
-
-userSchema.methods.setRefreshTokenCookie = function (res) {
-    const { refreshToken } = this.getSignedToken(); // Use the correct method here
-    res.cookie("refreshToken", `${refreshToken}`, {
-        maxAge: 86400 * 7000,
-        httpOnly: true,
+userSchema.methods.createJWT = function () {
+    return JWT.sign({ userId: this._id }, process.env.JWT_SECRET, {
+        expiresIn: '1d',
     });
 };
-
 const User = mongoose.model('user', userSchema)
 
 export default User;
