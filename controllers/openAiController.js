@@ -41,7 +41,7 @@ export const paragraphController = async (req, res) => {
             temperature: 0.5,
         });
 
-        console.log(response); // Check the entire response
+        console.log(response);
         if (response) {
             if (response.choices[0].text) {
                 return res.status(200).json(response.choices[0].text);

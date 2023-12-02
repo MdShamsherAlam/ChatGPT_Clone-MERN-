@@ -14,8 +14,8 @@ const router = express.Router();
 //route
 router.post("/summary", isAuth, summaryController);
 router.post("/paragraph", isAuth, paragraphController);
-router.post("/chatbot", chatbotController);
-router.post("/js-converter", jsconverterController);
-router.post("/scifi-image", scifiImageController);
+router.post("/chatbot", isAuth, chatbotController);
+router.post("/js-converter", isAuth, jsconverterController);
+router.post("/scifi-image", isAuth, scifiImageController);
 
 export default router;
