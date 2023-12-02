@@ -2,10 +2,6 @@
 import express from 'express'
 // const morgan=require('morgan')
 import morgan from 'morgan'
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url'; // Add this import
-
-
 // const cors=require('cors')
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -26,14 +22,6 @@ app.use(morgan('dev'))
 app.use(errorHandler)
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v2/openai', openAiRoutes)
-const __filename = fileURLToPath(import.meta.url); // Add this line
-const __dirname = dirname(__filename); // Add this line
-app.use(express.static(join(__dirname, '../client/build')));
-app.get('*', function (req, res) {
-    res.sendFile(join(__dirname, './client/build/index.html'))
-})
-
-
 const PORT = process.env.PORT || 8081
 
 
